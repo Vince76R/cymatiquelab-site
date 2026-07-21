@@ -72,3 +72,12 @@ Série destinée aux entreprises et groupes : pause sonore, cohésion, écoute, 
 - Une série "Recherche CymatiqueLab" sur sommeil, concentration, fréquences, ressentis et observations EEG exploratoires.
 - Une brochure corporative Team Building vibratoire pour entreprises et organismes.
 - Des témoignages après voyages sonores et ateliers de groupe.
+
+## Ajout V7 — Réservations et lancement
+
+- Voyages sonores : lundi, mercredi et dimanche de 19 h à 21 h, plus dimanche de 14 h à 16 h.
+- Tarif promotionnel : 20 $ par personne pour un temps limité.
+- Capacité maximale : 15 personnes.
+- Rencontre privée standard : 100 $, durée approximative de 1 h 30 à 2 h.
+- Formules privées personnalisables selon la durée et le nombre de participants.
+- Deux parcours distincts sur le site : voyages sonores et rencontres privées.

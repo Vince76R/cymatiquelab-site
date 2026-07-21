@@ -4,3 +4,30 @@
 @media(max-width:980px){.hero-grid,.split-panel,.journey-grid,.lab-grid,.feature{grid-template-columns:1fr}.path-grid,.grid-3{grid-template-columns:1fr 1fr}.hero-stage{min-height:500px}.footer-grid{grid-template-columns:1fr 1fr}.cta-panel{display:block}.cta-panel .btn-row{margin-top:24px}.navlinks{display:none;position:absolute;top:78px;left:20px;right:20px;flex-direction:column;align-items:stretch;padding:15px;border:1px solid var(--line);border-radius:22px;background:rgba(6,6,16,.97);box-shadow:var(--shadow)}.navlinks.open{display:flex}.menu-toggle{display:inline-flex}.eco-flow{grid-template-columns:1fr}.eco-flow>b{transform:rotate(90deg);text-align:center}.section-head{display:block}.section-head p{margin-top:14px}.grid-2{grid-template-columns:1fr}}
 @media(max-width:650px){.container{width:min(var(--max),calc(100% - 28px))}.hero{padding-top:62px}.hero-stage{min-height:430px}.cymatic-disc{width:240px;height:240px}.sound-card-b{display:none}.trust-row{display:grid;grid-template-columns:repeat(3,1fr)}.trust-row div{padding-right:8px;margin-right:8px}.path-grid,.grid-3{grid-template-columns:1fr}.section{padding:70px 0}.manifesto-visual{min-height:420px}.journey-main,.journey-steps,.cta-panel{padding:23px}.readouts{grid-template-columns:1fr}.readouts div{border-right:0;border-bottom:1px solid var(--line)}.footer-grid{grid-template-columns:1fr}.footer-bottom{display:block}.footer-bottom span{display:block;margin-top:5px}.brand span{font-size:21px}.nav{min-height:70px}.navlinks{top:70px}h1{font-size:48px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pulse-dot,.cymatic-disc,.cymatic-disc span{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+
+/* V5 — direction Facebook cosmique */
+.hero-facebook{position:relative;min-height:760px;padding:0;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-facebook-bg{position:absolute;inset:0;z-index:-2;background-image:url('cymatiquelab-facebook-universe.jpg');background-size:cover;background-position:center center;filter:saturate(1.06) contrast(1.03)}
+.hero-facebook:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,4,15,.98) 0%,rgba(4,4,15,.90) 32%,rgba(4,4,15,.28) 62%,rgba(4,4,15,.06) 100%),linear-gradient(180deg,rgba(4,4,15,.15),rgba(4,4,15,.58))}
+.hero-facebook-grid{min-height:760px;display:grid;grid-template-columns:minmax(0,.96fr) minmax(420px,1.04fr);align-items:center;gap:42px}
+.hero-facebook-copy{padding:100px 0 82px;max-width:710px}
+.hero-brandline{font-family:Georgia,"Times New Roman",serif;font-size:clamp(48px,7vw,88px);line-height:.95;letter-spacing:-.055em;margin-top:24px;color:var(--paper);text-shadow:0 12px 38px rgba(0,0,0,.45)}
+.hero-brandline span{font-style:italic;background:linear-gradient(90deg,#9a55f7,#db65f0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-signature{margin:18px 0 26px;color:var(--gold);font-size:clamp(16px,2vw,23px);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.hero-facebook h1{font-size:clamp(42px,5.8vw,76px);max-width:720px;margin:0}
+.hero-facebook .lead{max-width:660px;color:#dedaf4;text-shadow:0 3px 20px rgba(0,0,0,.55)}
+.hero-proof{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.hero-proof span{padding:9px 13px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(7,7,19,.46);backdrop-filter:blur(12px);color:var(--muted);font-size:12px}
+.hero-proof b{color:var(--paper)}
+.hero-facebook-visual{min-height:650px;position:relative}
+.hero-frequency-seal{position:absolute;top:76px;right:10px;display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid rgba(255,232,138,.32);border-radius:999px;background:rgba(7,7,19,.5);backdrop-filter:blur(14px);color:var(--gold);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.hero-frequency-seal img{width:38px;height:38px;border-radius:50%}
+.hero-floating-card{position:absolute;right:0;bottom:56px;width:min(420px,90%);padding:22px 24px;border:1px solid rgba(255,255,255,.18);border-radius:24px;background:rgba(7,7,19,.64);backdrop-filter:blur(18px);box-shadow:var(--shadow)}
+.hero-floating-card small,.hero-floating-card strong{display:block}
+.hero-floating-card small{color:var(--gold);letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+.hero-floating-card strong{margin-top:7px;font-family:Georgia,"Times New Roman",serif;font-size:25px;line-height:1.15}
+.choice-section{background:radial-gradient(circle at 50% 0%,rgba(155,85,247,.14),transparent 32%),rgba(255,255,255,.015)}
+.path-card:hover{border-color:rgba(213,96,241,.45);box-shadow:0 22px 65px rgba(114,43,194,.16)}
+.btn.primary{background:linear-gradient(135deg,#ffe88a 0%,#c37af6 54%,#7de8ff 100%)}
+@media(max-width:980px){.hero-facebook-grid{grid-template-columns:1fr;min-height:auto}.hero-facebook{min-height:auto}.hero-facebook-copy{padding:92px 0 28px}.hero-facebook-visual{min-height:480px}.hero-facebook:before{background:linear-gradient(180deg,rgba(4,4,15,.96) 0%,rgba(4,4,15,.84) 44%,rgba(4,4,15,.25) 72%,rgba(4,4,15,.56) 100%)}.hero-facebook-bg{background-position:64% center}.hero-frequency-seal{top:24px}.hero-floating-card{bottom:28px}}
+@media(max-width:650px){.hero-facebook-copy{padding:78px 0 18px}.hero-brandline{font-size:53px}.hero-signature{font-size:13px;letter-spacing:.07em}.hero-facebook h1{font-size:43px}.hero-facebook-visual{min-height:390px}.hero-facebook-bg{background-position:68% center}.hero-frequency-seal{display:none}.hero-floating-card{left:0;right:auto;width:100%;bottom:22px}.hero-floating-card strong{font-size:21px}.hero-proof{display:grid}.hero-proof span{width:max-content;max-width:100%}}

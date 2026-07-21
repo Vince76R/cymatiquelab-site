@@ -1,0 +1,40 @@
+<svg width="980" height="260" viewBox="0 0 980 260" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">CymatiqueLab logo primary</title>
+<desc id="desc">A luminous cymatic wave mark with the CymatiqueLab wordmark and slogan.</desc>
+<defs>
+  <radialGradient id="g1" cx="50%" cy="50%" r="65%">
+    <stop offset="0%" stop-color="#FFF7D1"/>
+    <stop offset="28%" stop-color="#C9A94E"/>
+    <stop offset="58%" stop-color="#6B4CFF"/>
+    <stop offset="100%" stop-color="#19D9FF" stop-opacity="0.65"/>
+  </radialGradient>
+  <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FFE88A"/>
+    <stop offset="45%" stop-color="#A782FF"/>
+    <stop offset="100%" stop-color="#19D9FF"/>
+  </linearGradient>
+  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="7" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+</defs>
+<rect width="980" height="260" rx="34" fill="#070713"/>
+<g transform="translate(95 130)" filter="url(#glow)">
+  <circle r="62" stroke="url(#g1)" stroke-width="3.2" opacity="0.95"/>
+  <circle r="42" stroke="url(#g1)" stroke-width="2.4" opacity="0.75"/>
+  <circle r="22" stroke="#FFF7D1" stroke-width="2" opacity="0.9"/>
+  <circle r="5" fill="#FFF7D1"/>
+  <path d="M-72 0 C-40 -28 -18 -28 0 0 C18 28 40 28 72 0" stroke="url(#g2)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M0 -72 C28 -40 28 -18 0 0 C-28 18 -28 40 0 72" stroke="url(#g2)" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+  <path d="M-52 -52 C-26 -40 -12 -20 0 0 C12 20 26 40 52 52" stroke="#A782FF" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+  <path d="M52 -52 C26 -40 12 -20 0 0 C-12 20 -26 40 -52 52" stroke="#19D9FF" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+</g>
+<g transform="translate(205 86)">
+  <text x="0" y="38" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="700" fill="#F7F3E8" letter-spacing="-1.5">CymatiqueLab</text>
+  <text x="2" y="84" font-family="Inter, Arial, sans-serif" font-size="20" fill="#C7C5E8" letter-spacing="1.8">L'EXPERIENCE VIBRATOIRE QUI TRANSFORME</text>
+  <rect x="2" y="105" width="392" height="2" fill="url(#g2)" opacity="0.75"/>
+</g>
+</svg>

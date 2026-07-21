@@ -63,3 +63,18 @@ Cette version ajoute la section Activités avec :
 - Silhouette en méditation et motif vibratoire utilisés comme décor immersif.
 - Texte HTML corrigé : « Découvrez votre fréquence intérieure ».
 - Appels à l'action et offres disponibles conservés au premier plan.
+
+## Version V7 — Design Facebook + réservations
+
+Cette version conserve la direction visuelle cosmique de la V5 et ajoute les fonctions de réservation de la V6 :
+
+- bouton « Voir les voyages sonores » ;
+- bouton « Réserver une rencontre privée » ;
+- page dédiée aux voyages sonores ;
+- page dédiée à la rencontre privée ;
+- liens Calendly séparés ;
+- prix, horaires et capacité affichés clairement.
+
+### Mise en ligne GitHub / Cloudflare
+
+Téléverser le contenu de ce dossier directement à la racine du dépôt GitHub : `index.html`, `assets/`, `pages/`, `docs/` et `README.md`.

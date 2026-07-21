@@ -1,0 +1,18 @@
+<svg width="980" height="220" viewBox="0 0 980 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">CymatiqueLab horizontal light logo</title>
+<desc id="desc">CymatiqueLab wordmark for light backgrounds.</desc>
+<defs>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="#A9811E"/><stop offset="0.5" stop-color="#5E45C7"/><stop offset="1" stop-color="#067991"/>
+  </linearGradient>
+</defs>
+<g transform="translate(100 110)">
+  <circle r="58" stroke="url(#line)" stroke-width="4"/>
+  <circle r="34" stroke="url(#line)" stroke-width="2.5" opacity="0.75"/>
+  <path d="M-68 0 C-40 -24 -18 -24 0 0 C18 24 40 24 68 0" stroke="url(#line)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M0 -68 C24 -40 24 -18 0 0 C-24 18 -24 40 0 68" stroke="url(#line)" stroke-width="5" stroke-linecap="round"/>
+  <circle r="5" fill="#18122B"/>
+</g>
+<text x="200" y="100" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="700" fill="#18122B" letter-spacing="-1.5">CymatiqueLab</text>
+<text x="203" y="140" font-family="Inter, Arial, sans-serif" font-size="18" fill="#4C4264" letter-spacing="1.6">LE SON MESURE, RESSENTI ET REVELE</text>
+</svg>
