@@ -78,3 +78,20 @@ Cette version conserve la direction visuelle cosmique de la V5 et ajoute les fon
 ### Mise en ligne GitHub / Cloudflare
 
 Téléverser le contenu de ce dossier directement à la racine du dépôt GitHub : `index.html`, `assets/`, `pages/`, `docs/` et `README.md`.
+
+
+## Version V8 — Paiements Square
+
+- Paiement voyage sonore : https://square.link/u/ckVrB2Dl
+- Paiement rencontre privée : https://square.link/u/l8cOXQ3y
+- Pages graphiques de paiement ajoutées.
+- Parcours conseillé : réservation Calendly, puis paiement Square.
+
+
+## Version V9 — contenus réels et Team Building
+
+- Ajout de la photo historique de Vincent Robert et Martin Leroux.
+- Ajout d’une photo réelle du microphone 3Dio FS Pro II.
+- Refonte des pages À propos, 3Dio et Team Building.
+- Ajout d’un questionnaire Team Building téléchargeable.
+- Statuts plus clairs pour les analyses, tests de bâtons et EEG en développement.

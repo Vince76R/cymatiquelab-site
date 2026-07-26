@@ -31,3 +31,16 @@
 .btn.primary{background:linear-gradient(135deg,#ffe88a 0%,#c37af6 54%,#7de8ff 100%)}
 @media(max-width:980px){.hero-facebook-grid{grid-template-columns:1fr;min-height:auto}.hero-facebook{min-height:auto}.hero-facebook-copy{padding:92px 0 28px}.hero-facebook-visual{min-height:480px}.hero-facebook:before{background:linear-gradient(180deg,rgba(4,4,15,.96) 0%,rgba(4,4,15,.84) 44%,rgba(4,4,15,.25) 72%,rgba(4,4,15,.56) 100%)}.hero-facebook-bg{background-position:64% center}.hero-frequency-seal{top:24px}.hero-floating-card{bottom:28px}}
 @media(max-width:650px){.hero-facebook-copy{padding:78px 0 18px}.hero-brandline{font-size:53px}.hero-signature{font-size:13px;letter-spacing:.07em}.hero-facebook h1{font-size:43px}.hero-facebook-visual{min-height:390px}.hero-facebook-bg{background-position:68% center}.hero-frequency-seal{display:none}.hero-floating-card{left:0;right:auto;width:100%;bottom:22px}.hero-floating-card strong{font-size:21px}.hero-proof{display:grid}.hero-proof span{width:max-content;max-width:100%}}
+
+/* V9 — médias réels, statuts de développement et questionnaire */
+.photo-frame{margin:0;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:rgba(255,255,255,.04);box-shadow:var(--shadow)}
+.photo-frame img{width:100%;height:auto;object-fit:cover}
+.photo-frame figcaption{padding:13px 16px;color:var(--muted2);font-size:13px;border-top:1px solid var(--line)}
+.hero-photo img{aspect-ratio:4/3;object-fit:cover;object-position:center}
+.media-feature{align-items:center}
+.status-note{margin-top:18px;padding:16px 18px;border:1px solid rgba(255,230,138,.28);border-radius:18px;background:rgba(255,230,138,.07);color:var(--muted)}
+.status-note strong{color:var(--gold)}
+.launch-notice{margin-top:30px;display:flex;gap:16px;align-items:flex-start;padding:20px 22px;border:1px solid rgba(255,230,138,.32);border-radius:22px;background:linear-gradient(135deg,rgba(255,230,138,.10),rgba(139,92,246,.08))}
+.launch-notice strong{display:block;font-size:18px}.launch-notice p{margin:5px 0 0;color:var(--muted)}
+.questionnaire{display:grid;gap:20px}.questionnaire .card h2{font-size:clamp(28px,4vw,42px);margin-bottom:18px}.questionnaire ol{margin:0;padding-left:24px}.questionnaire li{padding:8px 0;color:var(--muted)}
+@media(max-width:650px){.launch-notice{display:block}.launch-notice .status{display:inline-block;margin-bottom:10px}.photo-frame figcaption{font-size:12px}}
