@@ -30,3 +30,12 @@
 - [ ] Développer l’infolettre, Instagram et les automatisations.
 - [ ] Finaliser les protocoles jeunesse et EEG avec consentements adaptés.
 - [ ] Ajouter une carte des visiteurs/clients par ville lorsque les données seront disponibles et consenties.
+
+
+## Contrôles V11 à effectuer après mise en ligne
+- Tester l’accueil sur Samsung S24, iPhone et ordinateur.
+- Ouvrir et fermer le menu sur chaque format.
+- Tester les quatre liens Calendly de voyages sonores.
+- Tester Calendly rencontre privée et les deux liens Square.
+- Vérifier qu’une URL inexistante affiche bien la page 404.
+- Vérifier le texte et les disponibilités dans chaque événement Calendly.

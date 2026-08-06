@@ -67,3 +67,13 @@ Dernière mise à jour : 3 août 2026
 - Sona Materia et Sona Vita.
 - YouTube, Instagram, infolettre et abonnements.
 - Témoignages actuels et archives Audio Fidélité.
+
+
+## Mise à jour V11 — 6 août 2026
+- Correction prioritaire du rendu mobile (Samsung S24 et petits écrans).
+- Navigation unifiée sur toutes les pages.
+- Parcours de réservation corrigé : la page Réserver contient désormais quatre liens Calendly directs pour les voyages sonores et le lien de rencontre privée.
+- Paiement Square conservé comme deuxième étape.
+- Création d’une page 404 et conversion des liens internes en chemins racine.
+- Suppression des principales notes internes visibles et remplacement du badge LIVE par APERÇU · EXEMPLE.
+- Politique d’annulation affichée avant le paiement du voyage sonore.
