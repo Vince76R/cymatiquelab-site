@@ -17,3 +17,10 @@
 - Les quatre événements Calendly sont actifs, ont les bonnes disponibilités et une capacité maximale de 15.
 - Cloudflare sert 404.html avec un vrai code 404.
 - Le parcours complet fonctionne en navigation privée sur mobile.
+
+## V11.1 — correctif ciblé
+Cette mise à jour ne refond aucun gabarit. Elle modifie uniquement :
+1. la référence 432/440 Hz dans la ligne « Fréquences dominantes » du laboratoire;
+2. l’explication du nom CymatiqueLab sur la page À propos;
+3. l’adresse des pieds de page pour ouvrir Google Maps avec « Voir sur la carte »;
+4. les fichiers mémoire/documentation correspondants.

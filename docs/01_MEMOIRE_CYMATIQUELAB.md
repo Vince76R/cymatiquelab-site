@@ -77,3 +77,10 @@ Dernière mise à jour : 3 août 2026
 - Création d’une page 404 et conversion des liens internes en chemins racine.
 - Suppression des principales notes internes visibles et remplacement du badge LIVE par APERÇU · EXEMPLE.
 - Politique d’annulation affichée avant le paiement du voyage sonore.
+
+## Mise à jour ciblée V11.1
+- Page Laboratoire : la ligne « Fréquences dominantes » ne fait plus référence à 440 Hz ou 432 Hz.
+- Page À propos : ajout d’une explication du nom CymatiqueLab — « cymatique » pour l’étude des formes/motifs du son et « Lab » pour laboratoire.
+- Pied de page : l’adresse du centre ouvre maintenant Google Maps et comporte le lien « Voir sur la carte ».
+- Principe de maintenance : à partir de cette version, privilégier des correctifs ciblés et éviter les remplacements globaux de gabarits sauf nécessité explicite, afin de limiter les régressions.
+- Parcours souhaité : après réservation d’une date dans Calendly, rediriger si possible vers la page de paiement correspondante. Cette redirection se configure dans Calendly sur un forfait payant via la page de confirmation / redirection externe.
