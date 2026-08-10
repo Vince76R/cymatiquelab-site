@@ -24,3 +24,10 @@ Cette mise à jour ne refond aucun gabarit. Elle modifie uniquement :
 2. l’explication du nom CymatiqueLab sur la page À propos;
 3. l’adresse des pieds de page pour ouvrir Google Maps avec « Voir sur la carte »;
 4. les fichiers mémoire/documentation correspondants.
+
+
+## V11.2 — correctifs ciblés
+- La page `/pages/reserver` retrouve le header/navigation partagé, sans autre refonte.
+- La page `/pages/paiement-voyage-sonore` devient une page de paiement express pensée pour la redirection après Calendly : un seul appel à l’action principal vers Square, politique repliable et liens secondaires discrets.
+- Sur l’accueil, la chronologie du voyage sonore est explicitement présentée comme un déroulement habituel relatif à l’heure de réservation; les repères sont `Début`, `+ 20 min`, `+ 30 min`, `+ 1 h 30` afin d’éviter toute interprétation comme minuit.
+- Méthode de maintenance : correctifs ciblés uniquement; ne pas réécrire les autres pages lorsqu’un changement n’est pas demandé.

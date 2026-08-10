@@ -93,3 +93,24 @@ h1,h2,h3,p,a,span,strong,small,li{overflow-wrap:anywhere}
   .brand span{font-size:18px}.brand img{width:34px;height:34px}.menu-toggle{padding:8px 9px}
   .hero-facebook h1,h1{font-size:34px}.hero-brandline{font-size:38px}
 }
+
+
+/* V11.2 — correctifs ciblés : paiement express, réserver, chronologie */
+.payment-express-page{min-height:100vh;background:radial-gradient(circle at 25% 15%,rgba(139,92,246,.22),transparent 35%),radial-gradient(circle at 80% 80%,rgba(32,217,255,.12),transparent 34%),var(--ink)}
+.payment-express-wrap{min-height:100vh;display:grid;place-items:center;padding:28px 16px}
+.payment-express-card{width:min(620px,100%);text-align:center;padding:clamp(28px,6vw,54px);border:1px solid var(--line);border-radius:32px;background:rgba(10,10,26,.88);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+.payment-express-brand{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;font-family:Georgia,"Times New Roman",serif;font-size:24px;font-weight:800}
+.payment-express-brand img{width:44px;height:44px;border-radius:13px}
+.payment-express-check{display:inline-flex;padding:8px 12px;margin-bottom:16px;border:1px solid rgba(125,232,255,.28);border-radius:999px;color:var(--cyan);font-size:13px;font-weight:800}
+.payment-express-card h1{font-size:clamp(36px,7vw,58px);margin:0 0 18px}
+.payment-express-card>p{max-width:520px;margin:0 auto 24px;color:var(--muted);font-size:18px}
+.payment-express-button{width:100%;font-size:clamp(18px,4vw,22px);padding:17px 24px;min-height:62px}
+.payment-express-card .payment-express-note{margin:14px auto 0;font-size:13px;color:var(--muted2)}
+.payment-express-policy{margin:24px 0 0;text-align:left;border-top:1px solid var(--line);padding-top:18px;color:var(--muted)}
+.payment-express-policy summary{cursor:pointer;text-align:center;color:var(--paper);font-weight:750}
+.payment-express-policy p{font-size:14px;margin:12px 0 0}
+.payment-express-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--muted2)}
+.payment-express-links a{text-decoration:underline;text-underline-offset:3px}
+.journey-steps-intro{padding-bottom:18px!important;margin-bottom:4px;border-bottom:1px solid var(--line);background:transparent!important;border-radius:0!important}
+.journey-steps-intro p{margin:8px 0 0;color:var(--muted);font-size:14px}
+@media(max-width:650px){.payment-express-wrap{padding:18px 14px}.payment-express-card{padding:28px 20px;border-radius:24px}.payment-express-brand{margin-bottom:22px}.payment-express-card h1{font-size:36px}.payment-express-card>p{font-size:16px}.payment-express-links{display:grid;gap:10px}}

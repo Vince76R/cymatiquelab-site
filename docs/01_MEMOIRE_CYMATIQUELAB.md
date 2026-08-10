@@ -84,3 +84,10 @@ Dernière mise à jour : 3 août 2026
 - Pied de page : l’adresse du centre ouvre maintenant Google Maps et comporte le lien « Voir sur la carte ».
 - Principe de maintenance : à partir de cette version, privilégier des correctifs ciblés et éviter les remplacements globaux de gabarits sauf nécessité explicite, afin de limiter les régressions.
 - Parcours souhaité : après réservation d’une date dans Calendly, rediriger si possible vers la page de paiement correspondante. Cette redirection se configure dans Calendly sur un forfait payant via la page de confirmation / redirection externe.
+
+
+## Décisions de stabilisation V11.2
+- Après le choix d’une date Calendly pour un voyage sonore, la redirection doit mener à une page de paiement très épurée avec comme action principale le paiement Square de 20 $.
+- La page Réserver doit conserver le même header/menu que toutes les autres pages.
+- La chronologie affichée sur l’accueil est relative au début de la réservation et ne doit jamais utiliser `00:00` / `00:20` sans explication.
+- À partir de maintenant, privilégier des patchs ciblés et ne modifier que les fichiers et éléments explicitement concernés afin d’éviter les régressions.
