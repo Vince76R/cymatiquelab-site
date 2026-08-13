@@ -91,3 +91,11 @@ Dernière mise à jour : 3 août 2026
 - La page Réserver doit conserver le même header/menu que toutes les autres pages.
 - La chronologie affichée sur l’accueil est relative au début de la réservation et ne doit jamais utiliser `00:00` / `00:20` sans explication.
 - À partir de maintenant, privilégier des patchs ciblés et ne modifier que les fichiers et éléments explicitement concernés afin d’éviter les régressions.
+
+## Rencontre privée — positionnement confirmé (août 2026)
+- Offre standard : 100 $ taxes incluses, une personne, environ 1 h 30 à 2 h.
+- Cette offre n’est pas un format unique ni fermé : CymatiqueLab peut concevoir des rencontres sur mesure selon les besoins, objectifs, nombre de participants et contexte.
+- Formats possibles : séances prolongées, petits groupes, demi-journées, journées complètes, expériences thématiques, rencontres en ligne et autres formules personnalisées.
+- Message central : l’approche repose sur l’écoute et l’adaptation; comprendre ce que les personnes recherchent afin de construire une expérience pertinente, agréable et adaptée.
+- Éviter les promesses de résultat ou les formulations médicales. Exprimer la volonté d’aider de façon humaine, utile et responsable plutôt que de promettre un effet garanti.
+
