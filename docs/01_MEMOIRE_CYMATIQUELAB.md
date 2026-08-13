@@ -106,3 +106,13 @@ Dernière mise à jour : 3 août 2026
 - Voyages sonores réguliers : accueil au début; porte habituellement verrouillée environ 22 minutes après l’heure annoncée pour préserver l’immersion. Toujours vérifier les informations de l’événement réservé.
 - Rencontres privées, groupes et activités sur mesure : possibilité d’adapter l’accès, les sorties temporaires ou certaines arrivées particulières lorsque cela respecte le groupe et le déroulement.
 - Encourager les participants à communiquer tout besoin particulier à l’avance.
+
+
+## Mise à jour V11.6 — finition pré-lancement
+- Paiement : une place est garantie lorsqu’elle est payée. D’autres modes (sur place, transfert) peuvent être acceptés après entente préalable, mais une réservation non payée n’est pas garantie.
+- Accueil : les trois pastilles Voyages sonores / Rencontres privées / Team Building sont cliquables.
+- Accueil : « Entrez au cœur de votre vibration » mène vers une section de rencontre personnalisée.
+- Rencontre personnalisée : possibilité d’intégrer écoute, échanges, expérience sonore et consultation libre de la bibliothèque de développement personnel/réflexion, sans présenter cela comme psychothérapie, diagnostic ou traitement.
+- Copyright : affiché en dur « © 2026 CymatiqueLab · Tous droits réservés. »
+- Page Tests de bâtons : note interne remplacée par une formulation publique.
+- Pour toute future activité plus expérimentale (EEG, recherche, mineurs, collecte de données), prévoir un consentement spécifique distinct des conditions générales.
