@@ -99,3 +99,10 @@ Dernière mise à jour : 3 août 2026
 - Message central : l’approche repose sur l’écoute et l’adaptation; comprendre ce que les personnes recherchent afin de construire une expérience pertinente, agréable et adaptée.
 - Éviter les promesses de résultat ou les formulations médicales. Exprimer la volonté d’aider de façon humaine, utile et responsable plutôt que de promettre un effet garanti.
 
+
+
+## Règle d’arrivée et d’accès — mise à jour août 2026
+- Les consignes d’arrivée peuvent varier selon l’activité.
+- Voyages sonores réguliers : accueil au début; porte habituellement verrouillée environ 22 minutes après l’heure annoncée pour préserver l’immersion. Toujours vérifier les informations de l’événement réservé.
+- Rencontres privées, groupes et activités sur mesure : possibilité d’adapter l’accès, les sorties temporaires ou certaines arrivées particulières lorsque cela respecte le groupe et le déroulement.
+- Encourager les participants à communiquer tout besoin particulier à l’avance.
