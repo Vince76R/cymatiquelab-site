@@ -17,12 +17,20 @@ const lightboxLinks=document.querySelectorAll('[data-lightbox]');if(lightboxLink
   const readConsent=()=>{try{return localStorage.getItem(CONSENT_KEY);}catch(_){return null;}};
   const writeConsent=value=>{try{localStorage.setItem(CONSENT_KEY,value);}catch(_){/* stockage indisponible */}};
 
+  const trackReservationPage=()=>{
+    const path=window.location.pathname.replace(/\/$/,'');
+    if(path==='/pages/reserver'||path==='/pages/reserver.html'){
+      fbq('track','ViewContent',{content_name:'Réserver une expérience CymatiqueLab',content_category:'Réservation'});
+    }
+  };
+
   const loadMetaPixel=()=>{
     if(window.__cymatiquelabMetaPixelLoaded)return;
     window.__cymatiquelabMetaPixelLoaded=true;
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init',META_PIXEL_ID);
     fbq('track','PageView');
+    trackReservationPage();
   };
 
   const style=document.createElement('style');
@@ -44,6 +52,18 @@ const lightboxLinks=document.querySelectorAll('[data-lightbox]');if(lightboxLink
 
   banner.querySelector('.cl-accept').addEventListener('click',()=>{writeConsent(ACCEPTED);loadMetaPixel();hideBanner();});
   banner.querySelector('.cl-refuse').addEventListener('click',()=>{writeConsent(REFUSED);if(window.fbq){try{fbq('consent','revoke');}catch(_){}}hideBanner();});
+
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('a[href]');
+    if(!link||readConsent()!==ACCEPTED||typeof window.fbq!=='function')return;
+    const href=link.href||'';
+    const linkText=(link.textContent||'').trim().slice(0,100);
+    if(href.startsWith('https://calendly.com/')){
+      fbq('trackCustom','CalendlyClick',{destination:'Calendly',link_text:linkText});
+    }else if(href.startsWith('https://square.link/')){
+      fbq('trackCustom','SquarePaymentClick',{destination:'Square',link_text:linkText});
+    }
+  },true);
 
   const footerBottom=document.querySelector('.footer-bottom');
   if(footerBottom){
