@@ -1,4 +1,5 @@
 const WEBHOOK_URL = 'https://cymatiquelab.com/api/square-webhook';
+// Redeploy marker: Square signature secret is now configured in Cloudflare Production.
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
