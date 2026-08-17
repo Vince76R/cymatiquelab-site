@@ -111,10 +111,6 @@ async function sendMetaPurchase(context, event, payment) {
   const userData = await buildMetaUserData(payment);
   let syntheticTestIdentity = false;
 
-  // Square's generated webhook test event intentionally contains no real buyer
-  // identity. Only while Meta test mode is enabled, provide a fixed hashed
-  // external_id so the end-to-end CAPI connection can be validated without
-  // making another real purchase. This branch never runs in production mode.
   if (Object.keys(userData).length === 0 && context.env.META_TEST_EVENT_CODE) {
     userData.external_id = [await sha256('cymatiquelab-square-capi-test')];
     syntheticTestIdentity = true;
@@ -124,9 +120,6 @@ async function sendMetaPurchase(context, event, payment) {
     return { ok: false, skipped: true, reason: 'no_customer_match_data' };
   }
 
-  // Square's generated test payloads contain historical example timestamps.
-  // For a synthetic Meta test event, use the current time. Real payments keep
-  // their actual Square timestamp.
   const eventTime = syntheticTestIdentity
     ? Math.floor(Date.now() / 1000)
     : unixSeconds(event?.created_at || payment?.updated_at || payment?.created_at);
@@ -136,7 +129,9 @@ async function sendMetaPurchase(context, event, payment) {
       {
         event_name: 'Purchase',
         event_time: eventTime,
-        event_id: `square:${payment.id}`,
+        event_id: syntheticTestIdentity && event?.event_id
+          ? `square-test:${event.event_id}`
+          : `square:${payment.id}`,
         event_source_url: META_EVENT_SOURCE_URL,
         action_source: 'website',
         user_data: userData,
