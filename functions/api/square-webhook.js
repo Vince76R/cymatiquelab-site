@@ -124,11 +124,18 @@ async function sendMetaPurchase(context, event, payment) {
     return { ok: false, skipped: true, reason: 'no_customer_match_data' };
   }
 
+  // Square's generated test payloads contain historical example timestamps.
+  // For a synthetic Meta test event, use the current time. Real payments keep
+  // their actual Square timestamp.
+  const eventTime = syntheticTestIdentity
+    ? Math.floor(Date.now() / 1000)
+    : unixSeconds(event?.created_at || payment?.updated_at || payment?.created_at);
+
   const payload = {
     data: [
       {
         event_name: 'Purchase',
-        event_time: unixSeconds(event?.created_at || payment?.updated_at || payment?.created_at),
+        event_time: eventTime,
         event_id: `square:${payment.id}`,
         event_source_url: META_EVENT_SOURCE_URL,
         action_source: 'website',
@@ -253,6 +260,7 @@ export async function onRequestPost(context) {
   }));
 
   if (!meta.ok && !meta.skipped) {
+    console.error(`META_CAPI_ERROR: ${meta.error || 'unknown_error'}`);
     return json({
       received: true,
       verified: true,
