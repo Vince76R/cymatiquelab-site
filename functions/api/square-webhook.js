@@ -1,5 +1,6 @@
 const WEBHOOK_URL = 'https://cymatiquelab.com/api/square-webhook';
-// Redeploy marker: Square signature secret refreshed in Cloudflare Production on 2026-08-15 16:41 EDT.
+const META_DATASET_ID = '1604448031073152';
+const META_GRAPH_VERSION = 'v25.0';
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -50,11 +51,123 @@ async function verifySquareSignature(signatureHeader, rawBody, signatureKey) {
   return constantTimeEqual(new Uint8Array(signed), base64ToBytes(signatureHeader));
 }
 
+function normalize(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function normalizeCompact(value) {
+  return normalize(value).replace(/[^a-z0-9]/g, '');
+}
+
+async function sha256(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return [...new Uint8Array(digest)]
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+async function addHashed(target, key, value, compact = false) {
+  const normalized = compact ? normalizeCompact(value) : normalize(value);
+  if (normalized) target[key] = [await sha256(normalized)];
+}
+
+async function buildMetaUserData(payment) {
+  const userData = {};
+
+  await addHashed(userData, 'em', payment?.buyer_email_address);
+  await addHashed(userData, 'external_id', payment?.customer_id);
+
+  const address = payment?.billing_address || {};
+  await addHashed(userData, 'fn', address.first_name, true);
+  await addHashed(userData, 'ln', address.last_name, true);
+  await addHashed(userData, 'ct', address.locality, true);
+  await addHashed(userData, 'st', address.administrative_district_level_1, true);
+  await addHashed(userData, 'zp', address.postal_code, true);
+  await addHashed(userData, 'country', address.country, true);
+
+  return userData;
+}
+
+function unixSeconds(value) {
+  const ms = Date.parse(value || '');
+  return Number.isFinite(ms) ? Math.floor(ms / 1000) : Math.floor(Date.now() / 1000);
+}
+
+async function sendMetaPurchase(context, event, payment) {
+  const accessToken = context.env.META_CAPI_ACCESS_TOKEN;
+  if (!accessToken) {
+    return { ok: false, skipped: true, reason: 'missing_meta_token' };
+  }
+
+  const amount = payment?.total_money?.amount ?? payment?.amount_money?.amount;
+  const currency = payment?.total_money?.currency ?? payment?.amount_money?.currency;
+
+  if (!Number.isFinite(amount) || !currency || !payment?.id) {
+    return { ok: false, skipped: true, reason: 'missing_payment_fields' };
+  }
+
+  const userData = await buildMetaUserData(payment);
+  if (Object.keys(userData).length === 0) {
+    return { ok: false, skipped: true, reason: 'no_customer_match_data' };
+  }
+
+  const payload = {
+    data: [
+      {
+        event_name: 'Purchase',
+        event_time: unixSeconds(event?.created_at || payment?.updated_at || payment?.created_at),
+        event_id: `square:${payment.id}`,
+        action_source: 'other',
+        user_data: userData,
+        custom_data: {
+          value: amount / 100,
+          currency: String(currency).toUpperCase(),
+          order_id: payment?.order_id || payment.id
+        }
+      }
+    ]
+  };
+
+  // Optional: add META_TEST_EVENT_CODE as a Cloudflare variable/secret when
+  // testing in Meta Events Manager. Remove it after validation to send live data.
+  if (context.env.META_TEST_EVENT_CODE) {
+    payload.test_event_code = context.env.META_TEST_EVENT_CODE;
+  }
+
+  const endpoint = `https://graph.facebook.com/${META_GRAPH_VERSION}/${META_DATASET_ID}/events`;
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  let body;
+  try {
+    body = await response.json();
+  } catch (_) {
+    body = { raw: await response.text().catch(() => '') };
+  }
+
+  return {
+    ok: response.ok,
+    status: response.status,
+    events_received: body?.events_received ?? null,
+    fbtrace_id: body?.fbtrace_id ?? null,
+    error: response.ok ? null : body?.error?.message || 'meta_request_failed'
+  };
+}
+
 export async function onRequestGet(context) {
   return json({
     ok: true,
-    service: 'CymatiqueLab Square webhook',
-    mode: context.env.SQUARE_WEBHOOK_SIGNATURE_KEY ? 'signature-ready' : 'setup',
+    service: 'CymatiqueLab Square -> Meta CAPI webhook',
+    square_signature: context.env.SQUARE_WEBHOOK_SIGNATURE_KEY ? 'ready' : 'missing',
+    meta_capi: context.env.META_CAPI_ACCESS_TOKEN ? 'ready' : 'missing',
+    meta_test_mode: Boolean(context.env.META_TEST_EVENT_CODE),
     notification_url: WEBHOOK_URL
   });
 }
@@ -63,8 +176,6 @@ export async function onRequestPost(context) {
   const rawBody = await context.request.text();
   const signatureKey = context.env.SQUARE_WEBHOOK_SIGNATURE_KEY;
 
-  // Safe setup mode: acknowledge Square's endpoint checks, but do not process
-  // or forward any payment data until the signature key is stored in Cloudflare.
   if (!signatureKey) {
     return json({ received: true, processed: false, mode: 'setup' });
   }
@@ -81,16 +192,37 @@ export async function onRequestPost(context) {
   }
 
   const payment = event?.data?.object?.payment;
-  const isPaymentEvent = event?.type === 'payment.created' || event?.type === 'payment.updated';
-  const isCompleted = payment?.status === 'COMPLETED';
+  const isCompletedPayment = event?.type === 'payment.updated' && payment?.status === 'COMPLETED';
 
-  // Signature validation is live. Meta Purchase forwarding will be enabled only
-  // after the Meta server credential is stored as an encrypted Cloudflare secret.
+  if (!isCompletedPayment) {
+    return json({
+      received: true,
+      verified: true,
+      processed: false,
+      event_type: event?.type || null,
+      payment_status: payment?.status || null
+    });
+  }
+
+  const meta = await sendMetaPurchase(context, event, payment);
+
+  // Square can send more than one payment.updated notification after a payment
+  // is complete. Meta deduplicates them because every Purchase uses the stable
+  // event_id `square:<payment.id>`.
+  if (!meta.ok && !meta.skipped) {
+    return json({
+      received: true,
+      verified: true,
+      processed: false,
+      meta
+    }, 502);
+  }
+
   return json({
     received: true,
     verified: true,
-    processed: false,
-    event_type: event?.type || null,
-    completed_payment: Boolean(isPaymentEvent && isCompleted)
+    processed: Boolean(meta.ok),
+    payment_id: payment.id,
+    meta
   });
 }
