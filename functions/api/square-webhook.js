@@ -1,7 +1,6 @@
 const WEBHOOK_URL = 'https://cymatiquelab.com/api/square-webhook';
 const META_DATASET_ID = '1604448031073152';
 const META_GRAPH_VERSION = 'v25.0';
-// Redeploy marker: pick up META_TEST_EVENT_CODE from Cloudflare Production.
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -130,8 +129,6 @@ async function sendMetaPurchase(context, event, payment) {
     ]
   };
 
-  // Optional: add META_TEST_EVENT_CODE as a Cloudflare variable/secret when
-  // testing in Meta Events Manager. Remove it after validation to send live data.
   if (context.env.META_TEST_EVENT_CODE) {
     payload.test_event_code = context.env.META_TEST_EVENT_CODE;
   }
@@ -163,6 +160,13 @@ async function sendMetaPurchase(context, event, payment) {
 }
 
 export async function onRequestGet(context) {
+  console.log(JSON.stringify({
+    stage: 'healthcheck',
+    square_signature_ready: Boolean(context.env.SQUARE_WEBHOOK_SIGNATURE_KEY),
+    meta_capi_ready: Boolean(context.env.META_CAPI_ACCESS_TOKEN),
+    meta_test_mode: Boolean(context.env.META_TEST_EVENT_CODE)
+  }));
+
   return json({
     ok: true,
     service: 'CymatiqueLab Square -> Meta CAPI webhook',
@@ -178,22 +182,38 @@ export async function onRequestPost(context) {
   const signatureKey = context.env.SQUARE_WEBHOOK_SIGNATURE_KEY;
 
   if (!signatureKey) {
+    console.log(JSON.stringify({ stage: 'square_webhook', result: 'skipped', reason: 'missing_signature_key' }));
     return json({ received: true, processed: false, mode: 'setup' });
   }
 
   const signature = context.request.headers.get('x-square-hmacsha256-signature') || '';
   const valid = await verifySquareSignature(signature, rawBody, signatureKey);
-  if (!valid) return json({ error: 'invalid_signature' }, 403);
+  if (!valid) {
+    console.log(JSON.stringify({ stage: 'square_webhook', result: 'rejected', reason: 'invalid_signature' }));
+    return json({ error: 'invalid_signature' }, 403);
+  }
 
   let event;
   try {
     event = JSON.parse(rawBody);
   } catch (_) {
+    console.log(JSON.stringify({ stage: 'square_webhook', result: 'rejected', reason: 'invalid_json' }));
     return json({ error: 'invalid_json' }, 400);
   }
 
   const payment = event?.data?.object?.payment;
   const isCompletedPayment = event?.type === 'payment.updated' && payment?.status === 'COMPLETED';
+
+  console.log(JSON.stringify({
+    stage: 'square_webhook',
+    result: 'received',
+    event_type: event?.type || null,
+    payment_status: payment?.status || null,
+    completed_payment: isCompletedPayment,
+    has_payment_id: Boolean(payment?.id),
+    has_customer_match_data: Boolean(payment?.buyer_email_address || payment?.customer_id || payment?.billing_address?.first_name || payment?.billing_address?.last_name),
+    meta_test_mode: Boolean(context.env.META_TEST_EVENT_CODE)
+  }));
 
   if (!isCompletedPayment) {
     return json({
@@ -207,9 +227,16 @@ export async function onRequestPost(context) {
 
   const meta = await sendMetaPurchase(context, event, payment);
 
-  // Square can send more than one payment.updated notification after a payment
-  // is complete. Meta deduplicates them because every Purchase uses the stable
-  // event_id `square:<payment.id>`.
+  console.log(JSON.stringify({
+    stage: 'meta_capi',
+    result: meta.ok ? 'accepted' : meta.skipped ? 'skipped' : 'failed',
+    http_status: meta.status ?? null,
+    events_received: meta.events_received ?? null,
+    reason: meta.reason ?? null,
+    error: meta.error ?? null,
+    has_fbtrace_id: Boolean(meta.fbtrace_id)
+  }));
+
   if (!meta.ok && !meta.skipped) {
     return json({
       received: true,
