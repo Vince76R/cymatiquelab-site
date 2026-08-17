@@ -1,6 +1,7 @@
 const WEBHOOK_URL = 'https://cymatiquelab.com/api/square-webhook';
 const META_DATASET_ID = '1604448031073152';
 const META_GRAPH_VERSION = 'v25.0';
+const META_EVENT_SOURCE_URL = 'https://cymatiquelab.com/';
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -108,6 +109,17 @@ async function sendMetaPurchase(context, event, payment) {
   }
 
   const userData = await buildMetaUserData(payment);
+  let syntheticTestIdentity = false;
+
+  // Square's generated webhook test event intentionally contains no real buyer
+  // identity. Only while Meta test mode is enabled, provide a fixed hashed
+  // external_id so the end-to-end CAPI connection can be validated without
+  // making another real purchase. This branch never runs in production mode.
+  if (Object.keys(userData).length === 0 && context.env.META_TEST_EVENT_CODE) {
+    userData.external_id = [await sha256('cymatiquelab-square-capi-test')];
+    syntheticTestIdentity = true;
+  }
+
   if (Object.keys(userData).length === 0) {
     return { ok: false, skipped: true, reason: 'no_customer_match_data' };
   }
@@ -118,7 +130,8 @@ async function sendMetaPurchase(context, event, payment) {
         event_name: 'Purchase',
         event_time: unixSeconds(event?.created_at || payment?.updated_at || payment?.created_at),
         event_id: `square:${payment.id}`,
-        action_source: 'other',
+        event_source_url: META_EVENT_SOURCE_URL,
+        action_source: 'website',
         user_data: userData,
         custom_data: {
           value: amount / 100,
@@ -155,7 +168,8 @@ async function sendMetaPurchase(context, event, payment) {
     status: response.status,
     events_received: body?.events_received ?? null,
     fbtrace_id: body?.fbtrace_id ?? null,
-    error: response.ok ? null : body?.error?.message || 'meta_request_failed'
+    error: response.ok ? null : body?.error?.message || 'meta_request_failed',
+    synthetic_test_identity: syntheticTestIdentity
   };
 }
 
@@ -234,6 +248,7 @@ export async function onRequestPost(context) {
     events_received: meta.events_received ?? null,
     reason: meta.reason ?? null,
     error: meta.error ?? null,
+    synthetic_test_identity: Boolean(meta.synthetic_test_identity),
     has_fbtrace_id: Boolean(meta.fbtrace_id)
   }));
 
