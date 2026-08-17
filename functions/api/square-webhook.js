@@ -1,6 +1,7 @@
 const WEBHOOK_URL = 'https://cymatiquelab.com/api/square-webhook';
 const META_DATASET_ID = '1604448031073152';
 const META_GRAPH_VERSION = 'v25.0';
+// Redeploy marker: pick up META_TEST_EVENT_CODE from Cloudflare Production.
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
